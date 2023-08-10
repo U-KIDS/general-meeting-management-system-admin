@@ -1,10 +1,10 @@
+import ListComponent from "../../components/ListComponent";
 import styled, { css } from "styled-components"
-import { ACTIVATE_GREEN, DEACTIVATE_RED, DEFAULT_BLACK, DEFAULT_WHITE } from "../../../../consts/ColorCodes"
-import ListComponent from "../../components/ListComponent"
+import { ACTIVATE_GREEN, DEACTIVATE_RED, DEFAULT_BLACK, DEFAULT_WHITE, NAV_GRAY } from "../../../../consts/ColorCodes"
 
-export default function UserListComponent(props) {
+export default function AgendaListComponent(props) {
 
-    let activate = getActivate(props.activate)
+    let state = getState(props.state)
     
     const SizeStyle = css`
         ${(props) =>
@@ -16,7 +16,20 @@ export default function UserListComponent(props) {
 
     const ActivateStyle = css`
         ${(props) =>
-            props.value === "활성화" &&
+            props.value === "대기중" &&
+            css`
+                width: 80px;
+                height: 25px;
+                line-height: 25px;
+                border-radius: 5px;
+                color: ${DEFAULT_WHITE};
+                background-color: ${NAV_GRAY};
+                font-size: 12px;
+            `
+        }
+
+        ${(props) =>
+            props.value === "진행중" &&
             css`
                 width: 80px;
                 height: 25px;
@@ -29,7 +42,7 @@ export default function UserListComponent(props) {
         }
 
         ${(props) =>
-            props.value === "비활성화" &&
+            props.value === "종료" &&
             css`
                 width: 80px;
                 height: 25px;
@@ -50,7 +63,7 @@ export default function UserListComponent(props) {
         }
     `
     
-    const UserElement = styled.p`
+    const AgendaElement = styled.p`
         color: ${DEFAULT_BLACK};
         text-align: center;
         margin: 0px 30px 0px 30px;
@@ -59,22 +72,22 @@ export default function UserListComponent(props) {
         ${FontWeightStyle}
         ${ActivateStyle}
     `
-    
+
     return (
         <ListComponent to={props.to}>
-            <UserElement size="100px" weight="700">{props.name}</UserElement>
-            <UserElement value={activate}>{activate}</UserElement>
-            <UserElement size="120px">{props.studentNumber}</UserElement>
-            <UserElement size="80px">{props.grade}학년</UserElement>
-            <UserElement size="150px">{props.college}</UserElement>
-            <UserElement size="200px">{props.major}</UserElement>
+            <AgendaElement size="600px;">{props.name}</AgendaElement>
+            <AgendaElement value={state}>{state}</AgendaElement>
+            <AgendaElement size="0px;"></AgendaElement>
         </ListComponent>
     )
 }
 
-function getActivate(activate) {
-    if (activate === "true") {
-        return "활성화"
+function getState(state) {
+    if (state === "NOT_STARTED") {
+        return "대기중"
+    } else if (state === "IN_PROGRESS") {
+        return "진행중"
+    } else if (state === "COMPLETE") {
+        return "종료"
     }
-    return "비활성화";
 }

@@ -32,7 +32,7 @@ export default function UseListNav() {
     return (
         <UserElementNav>
             <NavElement size="100px">이름</NavElement>
-            <NavElement size="100px">상태</NavElement>
+            <NavElement size="80px">상태</NavElement>
             <NavElement size="120px">학번</NavElement>
             <NavElement size="80px">학년</NavElement>
             <NavElement size="150px">단과대학</NavElement>

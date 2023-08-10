@@ -23,7 +23,7 @@ export default function ListComponent(props) {
     `
     
     return (
-        <Wrapper>
+        <Wrapper to={props.to}>
             {props.children}
         </Wrapper>
     )

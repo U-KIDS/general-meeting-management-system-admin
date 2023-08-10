@@ -14,16 +14,16 @@ export default function UserList() {
         <Wrapper>
             <UserFilter />
             <UserListNav />
-            <UserListComponent name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
-            <UserListComponent name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" to="/" />
+            <UserListComponent to="/user/detail" name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            <UserListComponent to="/user/detail" name="김태완" activate="false" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
             <Pagination />
         </Wrapper>
     )
