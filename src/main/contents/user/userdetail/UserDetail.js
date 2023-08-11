@@ -53,7 +53,7 @@ export default function UserDetail() {
         <Wrapper>
             <Image src="https://github.com/U-KIDS/general-meeting-management-system-admin/assets/64270501/d715d64a-872c-4e92-9285-a3f802036f82"></Image>
             <StudentInfo>
-                <DetailTitle title="김멋사"></DetailTitle>
+                <DetailTitle title="김멋사" updateLink="/user/20194059/update" activate="true"></DetailTitle>
                 <InfoElement>단과대학 : SW융합대학</InfoElement>
                 <InfoElement>학과 : 컴퓨터소프트웨어공학과</InfoElement>
                 <InfoElement>학년 : 3학년</InfoElement>

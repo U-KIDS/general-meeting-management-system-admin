@@ -46,7 +46,7 @@ export default function DetailTitle(props) {
                 <Title>{props.title}</Title>
                 <Activate value={props.activate} />
             </TitleWrap>
-            <UpdateLink>수정</UpdateLink>
+            <UpdateLink to={props.updateLink}>수정</UpdateLink>
             <DeleteButton>삭제</DeleteButton>
         </Wrapper>
     )

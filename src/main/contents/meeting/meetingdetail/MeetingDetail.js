@@ -38,9 +38,9 @@ export default function MeetingDetail() {
                 <DetailSubTitle subtitle="안건" />
                 <SubContents>
                     <AgendaListNav />
-                    <AgendaListComponent to="/meeting/agenda/detail" name="선거세칙 개정안" state="COMPLETE" />
-                    <AgendaListComponent name="학생회칙 개정안" state="IN_PROGRESS" />
-                    <AgendaListComponent name="조직세칙 개정안" state="NOT_STARTED" />
+                    <AgendaListComponent to="/meeting/1/1" name="선거세칙 개정안" state="COMPLETE" />
+                    <AgendaListComponent to="/meeting/1/2" name="학생회칙 개정안" state="IN_PROGRESS" />
+                    <AgendaListComponent to="/meeting/1/3" name="조직세칙 개정안" state="NOT_STARTED" />
                     <ListCreateLink to="/meeting/3/agenda/create" />
                 </SubContents>
             </Info>

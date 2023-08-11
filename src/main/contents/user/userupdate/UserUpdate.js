@@ -1,16 +1,16 @@
 import styled from "styled-components"
-import { BACKGROUND_GRAY, DEFAULT_BLACK, DEFAULT_WHITE, LIGHT_NAVY } from "../../../../consts/ColorCodes"
+import { DEFAULT_WHITE, LIGHT_NAVY, DEFAULT_BLACK, BACKGROUND_GRAY } from "../../../../consts/ColorCodes"
 import DetailSubTitle from "../../components/DetailSubTitle"
 import InputBox from "../../components/InputBox"
 import SubContents from "../../components/SubContents"
 
-export default function MeetingCreate() {
+export default function UserUpdate() {
 
-    const Form = styled.div`
+    const Form = styled.form`
         margin: 30px;
+        padding: 30px;
         background-color: ${DEFAULT_WHITE};
         border-radius: 10px;
-        padding: 30px;
     `
 
     const InputElement = styled.div`
@@ -49,23 +49,29 @@ export default function MeetingCreate() {
 
     return (
         <Form>
-            <DetailSubTitle subtitle="정기총회 생성" />
+            <DetailSubTitle subtitle = "회원정보 수정" />
             <SubContents>
                 <InputElement>
-                    <InputNav>총회 이름</InputNav>
-                    <InputBox width="84%" />
+                    <InputNav>이름</InputNav>
+                    <InputBox value="김멋사" type="text" width="84%" />
                 </InputElement>
                 <InputElement>
-                    <InputNav>총회 날짜</InputNav>
-                    <InputBox width="84%" type="date"/>
+                    <InputNav>학번</InputNav>
+                    <InputBox value="20194059" type="text" width="84%" />
                 </InputElement>
                 <InputElement>
-                    <InputNav>주최</InputNav>
-                    <InputBox value="39대 총대의원회 파란" width="84%" />
+                    <InputNav>학년</InputNav>
+                    <InputBox value="3" type="number" width="84%" />
                 </InputElement>
-                <SubmitButton>
-                    생성
-                </SubmitButton>
+                <InputElement>
+                    <InputNav>단과대학</InputNav>
+                    <InputBox value="SW융합대학" type="text" width="84%" />
+                </InputElement>
+                <InputElement>
+                    <InputNav>학과</InputNav>
+                    <InputBox value="컴퓨터소프트웨어공학과" type="text" width="84%" />
+                </InputElement>
+                <SubmitButton>수정</SubmitButton>
             </SubContents>
         </Form>
     )

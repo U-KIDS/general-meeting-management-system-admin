@@ -14,9 +14,9 @@ export default function MeetingList() {
     return (
         <Wrapper>
             <MeetingListNav></MeetingListNav>
-            <MeetingListComponent to="/meeting/detail" name="제 98대 대의원 정기총회" state="COMPLETE" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
-            <MeetingListComponent to="/meeting/detail" name="제 99대 대의원 정기총회" state="IN_PROGRESS" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
-            <MeetingListComponent to="/meeting/detail" name="제 100대 대의원 정기총회" state="NOT_STARTED" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
+            <MeetingListComponent to="/meeting/1" name="제 98대 대의원 정기총회" state="COMPLETE" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
+            <MeetingListComponent to="/meeting/2" name="제 99대 대의원 정기총회" state="IN_PROGRESS" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
+            <MeetingListComponent to="/meeting/3" name="제 100대 대의원 정기총회" state="NOT_STARTED" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
             <ListCreateLink to="/meeting/create" />
         </ Wrapper>
     )
