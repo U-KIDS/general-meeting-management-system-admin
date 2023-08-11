@@ -48,7 +48,7 @@ export default function AgendaDetail() {
                 <DetailSubTitle subtitle="의결식 (%)" />
                 <SubContents>
                     <SubForm>
-                        <InputBox width="79%" placeholder=" %" />
+                        <InputBox width="79c%" placeholder=" %" />
                         <SubmitButton>적용</SubmitButton>
                     </SubForm>
                 </SubContents>

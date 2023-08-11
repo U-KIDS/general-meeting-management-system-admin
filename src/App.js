@@ -7,6 +7,7 @@ import UserDetail from './main/contents/user/userdetail/UserDetail';
 import MeetingList from './main/contents/meeting/meetinglist/MeetingList';
 import MeetingDetail from './main/contents/meeting/meetingdetail/MeetingDetail';
 import AgendaDetail from './main/contents/meeting/agedadetail/AgendaDetail';
+import MeetingCreate from './main/contents/meeting/meetingcreate/MeetingCreate';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path='/user/detail' element={<UserDetail />} />
           <Route path='/meeting' element={<MeetingList />} />
           <Route path='/meeting/detail' element={<MeetingDetail />} />
+          <Route path='/meeting/create' element={<MeetingCreate />} />
           <Route path='/meeting/agenda/detail' element={<AgendaDetail />} />
         </Route>
     </Routes>
