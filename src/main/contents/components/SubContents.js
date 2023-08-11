@@ -5,7 +5,7 @@ export default function SubContents(props) {
     
     const Wrapper = styled.div`
         background-color: ${BACKGROUND_GRAY};
-        padding: 20px 30px;
+        padding: 30px;
         border-radius: 10px;
     `
     
