@@ -9,12 +9,14 @@ import MeetingDetail from './main/contents/meeting/meetingdetail/MeetingDetail';
 import AgendaDetail from './main/contents/meeting/agedadetail/AgendaDetail';
 import MeetingCreate from './main/contents/meeting/meetingcreate/MeetingCreate';
 import UserUpdate from './main/contents/user/userupdate/UserUpdate';
+import Redirect from './main/Redirect';
 
 export default function App() {
   return (
     <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path='/' element={<Main />}>
+          <Route path='/' element={<Redirect />} />
           <Route path='/user' element={<UserList />} />
           <Route path='/user/:studentNumber' element={<UserDetail />} />
           <Route path='/user/:studentNumber/update' element={<UserUpdate />} />

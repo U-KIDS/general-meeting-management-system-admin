@@ -33,15 +33,15 @@ export default function Sidebar() {
 
     const MenuLink = styled(NavLink)`
         display: block;
-        width: 150px;
+        width: 180px;
         text-align: center;
         color: ${DEFAULT_WHITE};
-        margin: 0px 25px 45px 25px;
+        margin: 0px 10px 45px 10px;
         padding: 5px 0px 5px 0px;
         font-size: 20px;
         font-weight: 600;
         text-decoration: none;
-        border-radius: 10px;
+        border-radius: 5px;
         transition: .2s;
         &:hover {
             background-color: ${LIGHT_NAVY};
