@@ -10,6 +10,7 @@ import AgendaDetail from './main/contents/meeting/agedadetail/AgendaDetail';
 import MeetingCreate from './main/contents/meeting/meetingcreate/MeetingCreate';
 import UserUpdate from './main/contents/user/userupdate/UserUpdate';
 import Redirect from './main/Redirect';
+import AgendaCreate from './main/contents/meeting/agendacreate/AgendaCreate';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path='/meeting/:meegtingId' element={<MeetingDetail />} />
           <Route path='/meeting/create' element={<MeetingCreate />} />
           <Route path='/meeting/:meetingId/:agendaId/' element={<AgendaDetail />} />
+          <Route path='/meeting/:meetingId/agenda/create' element={<AgendaCreate />} />
         </Route>
     </Routes>
   );
