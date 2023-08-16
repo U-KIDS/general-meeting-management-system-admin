@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components";
-import { DEFAULT_WHITE, LIGHT_NAVY } from "../../../../consts/ColorCodes";
+import { DEFAULT_WHITE, LIGHT_NAVY, BACKGROUND_GRAY, DEFAULT_BLACK, NAV_GRAY } from "../../../../consts/ColorCodes";
 import DetailSubTitle from "../../components/DetailSubTitle";
 import DetailTitle from "../../components/DetailTitle";
 import InputBox from "../../components/InputBox";
 import SubContents from "../../components/SubContents";
 import VotePreview from "./VotePreview";
+import { Link } from "react-router-dom";
 
 export default function AgendaDetail() {
 
@@ -17,6 +18,28 @@ export default function AgendaDetail() {
         padding: 30px;
         border-radius: 10px;
         margin-bottom: 30px;
+    `
+
+    const SubTitleWrap = styled.div`
+        border-bottom: solid 1px ${BACKGROUND_GRAY};
+        padding-bottom: 7px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    `
+
+    const SubTitle = styled.p`
+        font-size: 22px;
+        font-weight: 600;
+        color: ${DEFAULT_BLACK};
+        margin-right: 30px;
+    `
+
+    const DetailLink = styled(Link)`
+        text-decoration: none;
+        color: ${NAV_GRAY};
+        font-size: 13px;
     `
 
     const SubForm = styled.form`
@@ -40,13 +63,18 @@ export default function AgendaDetail() {
         ABSTENTION : 8
     }
 
+    const linkText = "자세히 보기 >"
+
     return (
         <Wrapper>
             <InfoWrap>
                 <DetailTitle title="선거세칙 개정안" activate="NOT_STARTED" />       
             </InfoWrap>
             <InfoWrap>
-                <DetailSubTitle subtitle="투표 현황" />
+                <SubTitleWrap>
+                    <SubTitle>투표 현황</SubTitle>
+                    <DetailLink to="/meeting/3/1/vote">{linkText}</DetailLink>
+                </SubTitleWrap>
                 <VotePreview data={VoteData} />
             </InfoWrap>
             <InfoWrap>
