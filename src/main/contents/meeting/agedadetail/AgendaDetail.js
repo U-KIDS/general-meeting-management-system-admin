@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { DEFAULT_WHITE, LIGHT_NAVY } from "../../../../consts/ColorCodes";
 import DetailSubTitle from "../../components/DetailSubTitle";
 import DetailTitle from "../../components/DetailTitle";
 import InputBox from "../../components/InputBox";
 import SubContents from "../../components/SubContents";
+import VotePreview from "./VotePreview";
 
 export default function AgendaDetail() {
 
@@ -32,6 +33,12 @@ export default function AgendaDetail() {
         color: ${DEFAULT_WHITE};
         border-radius: 5px;
     `
+    
+    const VoteData = {
+        AGREE : 5,
+        DISAGREE : 42,
+        ABSTENTION : 8
+    }
 
     return (
         <Wrapper>
@@ -40,9 +47,7 @@ export default function AgendaDetail() {
             </InfoWrap>
             <InfoWrap>
                 <DetailSubTitle subtitle="투표 현황" />
-                <SubContents>
-                    asdasdasd
-                </SubContents>
+                <VotePreview data={VoteData} />
             </InfoWrap>
             <InfoWrap>
                 <DetailSubTitle subtitle="의결식 (%)" />
