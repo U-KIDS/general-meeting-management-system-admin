@@ -1,46 +1,53 @@
 import styled from "styled-components"
+import { useState } from "react"
+import axios from "axios"
+import { BASE_URL } from "../../../../consts/BaseUrl"
 import { ENGINEERING_COLLEGE, ENTIRE, GLOBAL_MANAGEMENT_COLLEGE, HUMANITIES_AND_SOCIAL_SCIENCE_COLLEGE, MEDICAL_SCIENCE_COLLEGE, NATURAL_SCIENCE_COLLEGE, PHYSICAL_EDUCATION_COLLEGE, SCH_MEDIA_LABS_COLLEGE, SW_CONVERGENCE_COLLEGE } from "../../../../consts/CollegeMajor"
 import { DEFAULT_BLACK, DEFAULT_WHITE, LIGHT_NAVY } from "../../../../consts/ColorCodes"
 
+const FilterForm = styled.form`
+    height: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+`
+
+const SelectInput = styled.select`
+    background-color: ${DEFAULT_WHITE};
+    color:${DEFAULT_BLACK};
+    margin-right: 20px;
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    outline: none;
+`
+
+const TextInput = styled.input`
+    background-color: ${DEFAULT_WHITE};
+    color:${DEFAULT_BLACK};
+    margin-right: 20px;
+    width: 230px;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+    outline: none;
+`
+
+const SubmitButton = styled.input`
+    background-color: ${LIGHT_NAVY};
+    color:${DEFAULT_WHITE};
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+`
+
 export default function UserFilter() {
 
-    const FilterForm = styled.form`
-        height: 30px;
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: space-between;
-    `
-
-    const SelectInput = styled.select`
-        background-color: ${DEFAULT_WHITE};
-        color:${DEFAULT_BLACK};
-        margin-right: 20px;
-        width: 120px;
-        height: 30px;
-        border-radius: 5px;
-        padding-left: 7px;
-        padding-right: 7px;
-        outline: none;
-    `
-
-    const TextInput = styled.input`
-        background-color: ${DEFAULT_WHITE};
-        color:${DEFAULT_BLACK};
-        margin-right: 20px;
-        width: 230px;
-        height: 30px;
-        border-radius: 5px;
-        padding-left: 10px;
-        outline: none;
-    `
-
-    const SubmitButton = styled.input`
-        background-color: ${LIGHT_NAVY};
-        color:${DEFAULT_WHITE};
-        width: 80px;
-        height: 30px;
-        border-radius: 5px;
-    `
+    const [values, setValues] = useState({
+        name: "",
+    })
 
     function collegeMajorChange(e) {
 
@@ -67,10 +74,27 @@ export default function UserFilter() {
         }
     }
 
+    const handleChange = function(e) {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = function() {
+        axios.get(BASE_URL, {
+            params: {
+                name: values.name 
+            }
+        }).then(function (response) {
+            console.log(response)
+        })
+    }
+
     return (
-        <FilterForm>
+        <FilterForm onSubmit={handleSubmit}>
             <div>
-                <SelectInput id="college" name="단과대학" onChange={collegeMajorChange}>
+                <SelectInput name="college" onChange={collegeMajorChange}>
                     <option value="전체">전체</option>
                     <option value="공과대학">공과대학</option>
                     <option value="글로벌경영대학">글로벌경영대학</option>
@@ -82,10 +106,16 @@ export default function UserFilter() {
                     <option value="SCH미디어랩스">SCH미디어랩스</option>
                     <option value="SW융합대학">SW융합대학</option>
                 </SelectInput>
-                <SelectInput id="major" name="단과대학">
+                <SelectInput id="major" name="major">
                     <option value="전체">전체</option>
                 </SelectInput>
-                <TextInput type="text" placeholder="이름"></TextInput>
+                <TextInput 
+                    type="text" 
+                    placeholder="이름"
+                    name="name" 
+                    value={values.name}
+                    onChange={handleChange}>
+                    </TextInput>
             </div>
             <SubmitButton value="검색" type="submit"></SubmitButton>
         </FilterForm>
