@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { BACKGROUND_GRAY, DEFAULT_BLACK, NAV_GRAY } from "../../../consts/ColorCodes"
 
+
 export default function InputBox(props) {
 
     const Input = styled.input`
@@ -14,7 +15,12 @@ export default function InputBox(props) {
     `
     
     return (
-        <Input value={props.value} type={props.type} placeholder={props.placeholder}>
+        <Input 
+            value={props.value} 
+            type={props.type} 
+            placeholder={props.placeholder}
+            name={props.name}
+            onChange={props.onChange}>
         </Input>
     )
 }

@@ -4,8 +4,24 @@ import MeetingListComponent from "./MeeetingListComponent"
 import MeetingListNav from "./MeetingListNav"
 import { Link } from "react-router-dom"
 import ListCreateLink from "../../components/ListCreateLink"
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { BASE_URL, CONFIG } from "../../../../consts/BaseUrl"
 
 export default function MeetingList() {
+
+    var [meetings, setMeetings] = useState([])
+
+    useEffect(() => {
+        axios.get(BASE_URL + "/admin/meeting", CONFIG)
+            .then((response) => {
+                console.log(response)
+                setMeetings(response.data.data.data)
+            })
+            .catch((error => {
+                console.log(error)
+            }))
+    }, [])
     
     const Wrapper = styled.div`
         margin:30px;
@@ -14,9 +30,11 @@ export default function MeetingList() {
     return (
         <Wrapper>
             <MeetingListNav></MeetingListNav>
-            <MeetingListComponent to="/meeting/1" name="제 98대 대의원 정기총회" state="COMPLETE" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
-            <MeetingListComponent to="/meeting/2" name="제 99대 대의원 정기총회" state="IN_PROGRESS" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
-            <MeetingListComponent to="/meeting/3" name="제 100대 대의원 정기총회" state="NOT_STARTED" sponsor="39대 총대의원회 파란" meetingDate="2023.09.11" />
+            {
+                meetings.map((meeting) => {
+                    return <MeetingListComponent to="/meeting/1" name={meeting.name} state={meeting.activate} sponsor={meeting.sponsor} meetingDate={meeting.meetingDate} />
+                })
+            }
             <ListCreateLink to="/meeting/create" />
         </ Wrapper>
     )
