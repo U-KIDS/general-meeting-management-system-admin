@@ -6,6 +6,7 @@ import SubContents from "../../components/SubContents"
 import { BASE_URL } from "../../../../consts/BaseUrl"
 import axios from "axios"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Form = styled.form`
     margin: 30px;
@@ -50,6 +51,8 @@ const SubmitButton = styled.button`
 
 export default function MeetingCreate() {
 
+    const navigate = useNavigate();
+
     const [values, setValues] = useState({
         name: "",
         date: "",
@@ -63,14 +66,25 @@ export default function MeetingCreate() {
         })
     }
 
-    const handleSubmit = function() {
-        axios.get(BASE_URL, {
-            params: {
-                name: values.name 
-            }
-        }).then(function (response) {
-            console.log(response)
-        })
+    const handleSubmit = function(e) {
+        e.preventDefault();
+
+        let body = {
+            name : values.name,
+            meetingDate : values.date + "T00:00:00.00000",
+            sponsor : values.sponsor
+        }
+
+        console.log(body.meetingDate)
+
+        axios.post(BASE_URL + "/admin/meeting" , body)
+            .then((response) => {
+                console.log(response)
+                navigate("/meeting/" + response.data.data.id)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     return (

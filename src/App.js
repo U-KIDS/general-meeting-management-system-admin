@@ -23,7 +23,7 @@ export default function App() {
           <Route path='/user/:studentNumber' element={<UserDetail />} />
           <Route path='/user/:studentNumber/update' element={<UserUpdate />} />
           <Route path='/meeting' element={<MeetingList />} />
-          <Route path='/meeting/:meegtingId' element={<MeetingDetail />} />
+          <Route path='/meeting/:meetingId' element={<MeetingDetail />} />
           <Route path='/meeting/create' element={<MeetingCreate />} />
           <Route path='/meeting/:meetingId/:agendaId/' element={<AgendaDetail />} />
           <Route path='/meeting/:meetingId/:agendaId/vote' element={<AgendaVote />} />

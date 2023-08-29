@@ -6,9 +6,34 @@ import ListCreateLink from "../../components/ListCreateLink"
 import SubContents from "../../components/SubContents"
 import AgendaListComponent from "./AgendaListComponent"
 import AgendaListNav from "./AgendaLIstNav"
+import { useState, useEffect } from "react"
+import axios from "axios"
+import { BASE_URL, CONFIG } from "../../../../consts/BaseUrl"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 export default function MeetingDetail() {
+
+    var [meeting, setMeeting] = useState([]);
+    var [agendas, setAgendas] = useState([]);
+    const { meetingId } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get(BASE_URL + `/admin/meeting/` + meetingId, CONFIG)
+            .then((response) => {
+                console.log(response.data.data)
+                setMeeting(response.data.data)
+                setAgendas(response.data.data.agendas)
+            })
+    }, [])
+
+    const deleteHandler = () => {
+        axios.delete(BASE_URL + `/admin/meeting/` + meetingId, CONFIG)
+            .then(() => {
+                navigate("/meeting")
+            })
+    }
     
     const Wrapper = styled.div`
         margin: 30px;
@@ -30,17 +55,19 @@ export default function MeetingDetail() {
     return(
         <Wrapper>
             <Info>
-                <DetailTitle title="제 98대 대의원 정기총회" activate="NOT_STARTED" />
-                <InfoElement>일시 : 2023.09.11</InfoElement>
-                <InfoElement>주최 : 39대 총대의원회 파란</InfoElement>
+                <DetailTitle title={meeting.meetingName} activate={meeting.activate} deleteHandler={deleteHandler} />
+                <InfoElement>일시 : {meeting.meetingDate}</InfoElement>
+                <InfoElement>주최 : {meeting.sponsor}</InfoElement>
             </Info>
             <Info>
                 <DetailSubTitle subtitle="안건" />
                 <SubContents>
                     <AgendaListNav />
-                    <AgendaListComponent to="/meeting/1/1" name="선거세칙 개정안" state="COMPLETE" />
-                    <AgendaListComponent to="/meeting/1/2" name="학생회칙 개정안" state="IN_PROGRESS" />
-                    <AgendaListComponent to="/meeting/1/3" name="조직세칙 개정안" state="NOT_STARTED" />
+                    {
+                        agendas.map((agenda) => {
+                            return <AgendaListComponent to={`/meeting/1/${agenda.id}`} name={agenda.title} state={agenda.agendaStatus} />
+                        })
+                    }
                     <ListCreateLink to="/meeting/3/agenda/create" />
                 </SubContents>
             </Info>
