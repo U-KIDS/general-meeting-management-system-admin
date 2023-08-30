@@ -14,8 +14,8 @@ export default function UserList() {
     useEffect(() => {
         axios.get(BASE_URL + "/admin/member", CONFIG)
             .then((response) => {
-                console.log(response.data)
-                // setMembers(response.data)
+                console.log(response)
+                setMembers(response)
             })
     }, [])
 

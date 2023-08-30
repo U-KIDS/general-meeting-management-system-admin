@@ -17,7 +17,7 @@ export default function MeetingListComponent(props) {
 
     const ActivateStyle = css`
         ${(props) =>
-            props.value === "대기중" &&
+            props.value === "비활성화" &&
             css`
                 width: 80px;
                 height: 25px;
@@ -30,7 +30,7 @@ export default function MeetingListComponent(props) {
         }
 
         ${(props) =>
-            props.value === "진행중" &&
+            props.value === "활성화" &&
             css`
                 width: 80px;
                 height: 25px;
@@ -38,19 +38,6 @@ export default function MeetingListComponent(props) {
                 border-radius: 5px;
                 color: ${DEFAULT_WHITE};
                 background-color: ${ACTIVATE_GREEN};
-                font-size: 12px;
-            `
-        }
-
-        ${(props) =>
-            props.value === "종료" &&
-            css`
-                width: 80px;
-                height: 25px;
-                line-height: 25px;
-                border-radius: 5px;
-                color: ${DEFAULT_WHITE};
-                background-color: ${DEACTIVATE_RED};
                 font-size: 12px;
             `
         }
@@ -85,11 +72,9 @@ export default function MeetingListComponent(props) {
 }
 
 function getState(state) {
-    if (state === "NOT_STARTED") {
-        return "대기중"
-    } else if (state === "IN_PROGRESS") {
-        return "진행중"
-    } else if (state === "COMPLETE") {
-        return "종료"
+    if (state === false) {
+        return "비활성화"
+    } else if (state === true) {
+        return "활성화"
     }
 }

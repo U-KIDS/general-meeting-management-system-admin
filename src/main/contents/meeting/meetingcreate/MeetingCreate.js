@@ -1,14 +1,13 @@
 import styled from "styled-components"
 import { BACKGROUND_GRAY, DEFAULT_BLACK, DEFAULT_WHITE, LIGHT_NAVY } from "../../../../consts/ColorCodes"
 import DetailSubTitle from "../../components/DetailSubTitle"
-import InputBox from "../../components/InputBox"
 import SubContents from "../../components/SubContents"
 import { BASE_URL } from "../../../../consts/BaseUrl"
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const Form = styled.form`
+const MeetingForm = styled.form`
     margin: 30px;
     background-color: ${DEFAULT_WHITE};
     border-radius: 10px;
@@ -28,6 +27,16 @@ const InputNav = styled.p`
     padding-left: 10px;
     font-size: 16px;
     font-weight: 600;
+    color: ${DEFAULT_BLACK};
+`
+
+const Input = styled.input`
+    width: 84%;
+    height: 35px;
+    border-radius: 5px;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    outline: none;
     color: ${DEFAULT_BLACK};
 `
 
@@ -75,8 +84,6 @@ export default function MeetingCreate() {
             sponsor : values.sponsor
         }
 
-        console.log(body.meetingDate)
-
         axios.post(BASE_URL + "/admin/meeting" , body)
             .then((response) => {
                 console.log(response)
@@ -88,37 +95,37 @@ export default function MeetingCreate() {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <MeetingForm onSubmit={handleSubmit}>
             <DetailSubTitle subtitle="정기총회 생성" />
             <SubContents>
                 <InputElement>
                     <InputNav>총회 이름</InputNav>
-                    <InputBox 
+                    <Input 
                         width="84%"
                         name="name"
                         value={values.name}
-                        onChange={handleChange} />
+                        onChange={handleChange} required></Input>
                 </InputElement>
                 <InputElement>
                     <InputNav>총회 날짜</InputNav>
-                    <InputBox 
+                    <Input 
                         width="84%"
                         type="date"
                         name="date"
                         value={values.date}
-                        onChange={handleChange} />
+                        onChange={handleChange} required></Input>
                 </InputElement>
                 <InputElement>
                     <InputNav>주최</InputNav>
-                    <InputBox 
+                    <Input 
                         value={values.sponsor} 
                         width="84%"
-                        name="sponsor"/>
+                        name="sponsor" required></Input>
                 </InputElement>
                 <SubmitButton>
                     생성
                 </SubmitButton>
             </SubContents>
-        </Form>
+        </MeetingForm>
     )
 }

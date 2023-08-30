@@ -32,7 +32,7 @@ export default function MeetingList() {
             <MeetingListNav></MeetingListNav>
             {
                 meetings.map((meeting) => {
-                    return <MeetingListComponent to="/meeting/1" name={meeting.name} state={meeting.activate} sponsor={meeting.sponsor} meetingDate={meeting.meetingDate} />
+                    return <MeetingListComponent to={`/meeting/${meeting.id}`} name={meeting.name} state={meeting.activate} sponsor={meeting.sponsor} meetingDate={meeting.meetingDate} />
                 })
             }
             <ListCreateLink to="/meeting/create" />

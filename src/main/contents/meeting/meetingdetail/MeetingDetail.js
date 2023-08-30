@@ -65,10 +65,10 @@ export default function MeetingDetail() {
                     <AgendaListNav />
                     {
                         agendas.map((agenda) => {
-                            return <AgendaListComponent to={`/meeting/1/${agenda.id}`} name={agenda.title} state={agenda.agendaStatus} />
+                            return <AgendaListComponent to={`/meeting/${meetingId}/${agenda.agendaId}`} name={agenda.title} state={agenda.agendaStatus} />
                         })
                     }
-                    <ListCreateLink to="/meeting/3/agenda/create" />
+                    <ListCreateLink to={`/meeting/${meetingId}/agenda/create`} />
                 </SubContents>
             </Info>
         </Wrapper>
