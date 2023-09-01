@@ -73,7 +73,7 @@ export default function UserListComponent(props) {
 }
 
 function getActivate(activate) {
-    if (activate === "true") {
+    if (activate === true) {
         return "활성화"
     }
     return "비활성화";

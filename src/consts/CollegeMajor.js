@@ -1,6 +1,5 @@
 // 공과대학
 var ENGINEERING_COLLEGE = [
-    "전체",
     "기계공학과",
     "에너지환경공학과",
     "디스플레이신소재공학과",
@@ -15,7 +14,6 @@ var ENGINEERING_COLLEGE = [
 
 // 글로벌경영대학
 var GLOBAL_MANAGEMENT_COLLEGE = [
-    "전체",
     "회계학과",
     "관관경영학과",
     "국제통상학과",
@@ -27,7 +25,6 @@ var GLOBAL_MANAGEMENT_COLLEGE = [
 
 // 의과대학
 var MEDICINE_COLLEGE = [
-    "전체",
     "간호학과",
     "의예과",
     "의학과",
@@ -35,7 +32,6 @@ var MEDICINE_COLLEGE = [
 
 // 의료과학대학
 var MEDICAL_SCIENCE_COLLEGE = [
-    "전체",
     "의약공학과",
     "의료IT공학과",
     "작업치료학과",
@@ -47,7 +43,6 @@ var MEDICAL_SCIENCE_COLLEGE = [
 
 // 인문사회과학대학
 var HUMANITIES_AND_SOCIAL_SCIENCE_COLLEGE = [
-    "전체",
     "경찰행정학과",
     "특수교육과",
     "사회복지학과",
@@ -59,7 +54,6 @@ var HUMANITIES_AND_SOCIAL_SCIENCE_COLLEGE = [
 
 // 자연과학대학
 var NATURAL_SCIENCE_COLLEGE = [
-    "전체",
     "생명과학과",
     "식품영양학과",
     "화학과",
@@ -68,7 +62,6 @@ var NATURAL_SCIENCE_COLLEGE = [
 
 // 체육대학
 var PHYSICAL_EDUCATION_COLLEGE = [
-    "전체",
     "사회체육학과",
     "스포츠과학과",
     "스포츠의학과",
@@ -76,7 +69,6 @@ var PHYSICAL_EDUCATION_COLLEGE = [
 
 // SCH미디어랩스대학
 var SCH_MEDIA_LABS_COLLEGE = [
-    "전체",
     "AI&빅데이터학과",
     "건축학과",
     "공연영상학과",
@@ -92,7 +84,6 @@ var SCH_MEDIA_LABS_COLLEGE = [
 
 // SW융합대학
 var SW_CONVERGENCE_COLLEGE = [
-    "전체",
     "컴퓨터소프트웨어공학과",
     "메타버스&게임학과",
     "정보보호학과",
@@ -100,7 +91,6 @@ var SW_CONVERGENCE_COLLEGE = [
 
 // 전체
 var ENTIRE = [
-    "전체",
 ]
 
 

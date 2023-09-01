@@ -51,15 +51,15 @@ export default function VotePreview(props) {
             <VoteValue>
                 <ValueElement>
                     <VoteColor backgroundcolor={AGREE_GREEN} />
-                    <ElementText>찬성 : {props.data.AGREE}</ElementText>
+                    <ElementText>찬성 : {props.data.agree}</ElementText>
                 </ValueElement>
                 <ValueElement>
                     <VoteColor backgroundcolor={DISAGREE_RED} />
-                    <ElementText>반대 : {props.data.DISAGREE}</ElementText>
+                    <ElementText>반대 : {props.data.disagree}</ElementText>
                 </ValueElement>
                 <ValueElement>
                     <VoteColor backgroundcolor={ABSTENTION_YELLOW} />
-                    <ElementText>기권 : {props.data.ABSTENTION}</ElementText>
+                    <ElementText>기권 : {props.data.abstention}</ElementText>
                 </ValueElement>
             </VoteValue>
         </VotePreview>

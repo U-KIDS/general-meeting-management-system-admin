@@ -8,17 +8,17 @@ export default function Piechart(props) {
     let chartData = [
         {
             title: "반대",
-            value: props.data.DISAGREE,
+            value: props.data.disagree,
             color: `${DISAGREE_RED}`
         },
         {
             title: "찬성",
-            value: props.data.AGREE,
+            value: props.data.agree,
             color: `${AGREE_GREEN}`
         },
         {
             title: "기권",
-            value: props.data.ABSTENTION,
+            value: props.data.abstention,
             color: `${ABSTENTION_YELLOW}`
         },
     ]

@@ -15,7 +15,7 @@ export default function UserList() {
         axios.get(BASE_URL + "/admin/member", CONFIG)
             .then((response) => {
                 console.log(response)
-                setMembers(response)
+                setMembers(response.data.data.data)
             })
     }, [])
 
@@ -25,9 +25,13 @@ export default function UserList() {
 
     return (
         <Wrapper>
-            <UserFilter />
+            <UserFilter setMembers={setMembers} />
             <UserListNav />
-            <UserListComponent to="/user/20194059" name="김태완" activate="true" studentNumber="20194059" grade="3" college="SW융합대학" major="컴퓨터소프트웨어공학과" />
+            {
+                members.map((member) => {
+                    return <UserListComponent to={`/user/${member.studentNumber}`} name={member.name} activate={member.activate} studentNumber={member.studentNumber} grade={member.grade} college={member.college} major={member.major} />
+                })
+            }
             <Pagination />
         </Wrapper>
     )

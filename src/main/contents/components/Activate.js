@@ -81,9 +81,9 @@ export default function Activate(props) {
 }
 
 function getActivate(activate) {
-    if (activate === "true") {
+    if (activate === true) {
         return "활성화"
-    } else if (activate === "false") {
+    } else if (activate === false) {
         return "비활성화"
     } else if (activate === "NOT_STARTED") {
         return "대기중" 

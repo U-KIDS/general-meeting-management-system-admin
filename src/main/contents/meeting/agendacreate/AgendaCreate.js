@@ -73,7 +73,7 @@ export default function AgendaCreate() {
     const [values, setValues] = useState({
         title: ""
     })
-    const [selectedImages, setSelectedImages] = useState(null)
+    const [selectedImages, setSelectedImages] = useState([])
 
     const handleChange = function(e) {
         setValues({
@@ -86,28 +86,29 @@ export default function AgendaCreate() {
         e.preventDefault()
         e.persist()
 
-        const selectedImages = e.target.files;
-        const fileUrlList = [...selectedImages];
-
-        for(let i; i< selectedImages.length; i++) {
-            const nowUrl = URL.createObjectURL(selectedImages[i])
-            fileUrlList.push(nowUrl[i])
-        }
-
-        setSelectedImages(fileUrlList)
+        setSelectedImages(e.target.files)
     }
 
     const handleSubmit = function(e) {
         e.preventDefault();
 
-        let body = {
-            title : values.title,
-            images : selectedImages
+        const formData = new FormData()
+
+        const inputJson = JSON.stringify(values)
+        const blob = new Blob([inputJson], {type: "application/json"})
+
+        formData.append('agendaInfoDto', blob)
+        for(let i=0; i< selectedImages.length; i++) {
+            console.log(selectedImages[i])
+            formData.append('images', selectedImages[i])
         }
 
-        console.log(body.images)
 
-        axios.post(BASE_URL + "/admin/agenda/meeting/" + meetingId , body)
+        axios.post(BASE_URL + "/admin/agenda/meeting/" + meetingId , formData, {
+            headers : {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
             .then((response) => {
                 console.log(response)
                 navigate("/meeting/" + meetingId)

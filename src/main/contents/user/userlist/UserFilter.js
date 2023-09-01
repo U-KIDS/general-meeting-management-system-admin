@@ -43,10 +43,13 @@ const SubmitButton = styled.input`
     border-radius: 5px;
 `
 
-export default function UserFilter() {
+export default function UserFilter(props) {
 
     const [values, setValues] = useState({
         name: "",
+        college: "",
+        major: "",
+        activate: ""
     })
 
     function collegeMajorChange(e) {
@@ -62,12 +65,12 @@ export default function UserFilter() {
         else if(e.target.value === "체육대학") college = PHYSICAL_EDUCATION_COLLEGE
         else if(e.target.value === "SCH미디어랩스") college = SCH_MEDIA_LABS_COLLEGE
         else if(e.target.value === "SW융합대학") college = SW_CONVERGENCE_COLLEGE
-        else if(e.target.value === "전체") college = ENTIRE
+        else if(e.target.value === "") college = ENTIRE
+
+        setValues({college : e.target.value})
 
         for (var major in college) {
-            console.log(major)
             var opt = document.createElement("option")
-            console.log(opt)
             opt.value = college[major]
             opt.innerHTML = college[major]
             target.appendChild(opt)
@@ -81,21 +84,33 @@ export default function UserFilter() {
         })
     }
 
-    const handleSubmit = function() {
-        axios.get(BASE_URL, {
+    const handleSubmit = function(e) {
+        e.preventDefault();
+        axios.get(BASE_URL + "/admin/member", {
             params: {
-                name: values.name 
+                name: values.name,
+                college: values.college,
+                major: values.major,
+                activate: values.activate,   
             }
         }).then(function (response) {
             console.log(response)
+            props.setMembers(response.data.data.data)
         })
     }
 
     return (
         <FilterForm onSubmit={handleSubmit}>
             <div>
+                <SelectInput onChange={handleChange} id="activate" name="activate">
+                    <option value="">상태</option>
+                    <option value="">전체</option>
+                    <option value={true}>활성화</option>
+                    <option value={false}>비활성화</option>
+                </SelectInput>
                 <SelectInput name="college" onChange={collegeMajorChange}>
-                    <option value="전체">전체</option>
+                    <option value="" selected>단과대학</option>
+                    <option value="">전체</option>
                     <option value="공과대학">공과대학</option>
                     <option value="글로벌경영대학">글로벌경영대학</option>
                     <option value="의과대학">의과대학</option>
@@ -106,8 +121,9 @@ export default function UserFilter() {
                     <option value="SCH미디어랩스">SCH미디어랩스</option>
                     <option value="SW융합대학">SW융합대학</option>
                 </SelectInput>
-                <SelectInput id="major" name="major">
-                    <option value="전체">전체</option>
+                <SelectInput onChange={handleChange} id="major" name="major">
+                    <option value="" selected>학과</option>
+                    <option value="">전체</option>
                 </SelectInput>
                 <TextInput 
                     type="text" 
@@ -115,7 +131,7 @@ export default function UserFilter() {
                     name="name" 
                     value={values.name}
                     onChange={handleChange}>
-                    </TextInput>
+                </TextInput>
             </div>
             <SubmitButton value="검색" type="submit"></SubmitButton>
         </FilterForm>

@@ -5,9 +5,43 @@ import DetailTitle from "../../components/DetailTitle";
 import InputBox from "../../components/InputBox";
 import SubContents from "../../components/SubContents";
 import VotePreview from "./VotePreview";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BASE_URL, CONFIG } from "../../../../consts/BaseUrl";
+import ImageSlider from "./ImageSlider";
 
 export default function AgendaDetail() {
+
+    var navigate = useNavigate()
+    var [agenda, setAgenda] = useState([])
+    var [voteData, setVoteData] = useState({
+        agree : 0,
+        disagee : 0,
+        abstention : 0
+    })
+    var [imageUrls, setImageUrls] = useState("")
+    var [maxSize, setMaxSize] = useState(0)
+    var {meetingId, agendaId, imageIndex} = useParams()
+    var indexValue = parseInt(imageIndex)
+
+    useEffect(() => {
+        axios.get(BASE_URL + "/admin/agenda/" + agendaId, CONFIG)
+            .then((response) => {
+                setAgenda(response.data.data)
+                setVoteData(response.data.data.votePreviewDto)
+                setImageUrls(response.data.data.imageUrls)
+
+                if (imageIndex === undefined) {
+                    if (response.data.data.imageUrls.length > 0) {
+                        navigate(`/meeting/${meetingId}/${agendaId}/0`)
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
 
     const Wrapper = styled.div`
         margin: 30px;
@@ -57,10 +91,28 @@ export default function AgendaDetail() {
         border-radius: 5px;
     `
     
-    const VoteData = {
-        AGREE : 5,
-        DISAGREE : 42,
-        ABSTENTION : 8
+    const deleteHandler = () => {
+        axios.delete(BASE_URL + `/admin/agenda/` + agendaId, CONFIG)
+            .then(() => {
+                navigate("/meeting/" + meetingId)
+            })
+    }
+
+    const init = function() {
+        if(indexValue != undefined && indexValue >= 0 && imageUrls.length >= 0) {
+            return (
+                <InfoWrap>
+                    <SubTitleWrap>
+                        <SubTitle>설명</SubTitle>
+                    </SubTitleWrap>
+                    <ImageSlider imageUrl={imageUrls[indexValue]} maxSize={maxSize} />
+                </InfoWrap>
+            )
+        } else {
+            return (
+                <></>
+            )
+        }
     }
 
     const linkText = "자세히 보기 >"
@@ -68,14 +120,15 @@ export default function AgendaDetail() {
     return (
         <Wrapper>
             <InfoWrap>
-                <DetailTitle title="선거세칙 개정안" activate="NOT_STARTED" />       
+                <DetailTitle title={agenda.title} activate={agenda.agendaStatus} deleteHandler={deleteHandler} />       
             </InfoWrap>
+            {init()}
             <InfoWrap>
                 <SubTitleWrap>
                     <SubTitle>투표 현황</SubTitle>
-                    <DetailLink to="/meeting/3/1/vote">{linkText}</DetailLink>
+                    <DetailLink to={`/meeting/${meetingId}/${agendaId}1/vote`}>{linkText}</DetailLink>
                 </SubTitleWrap>
-                <VotePreview data={VoteData} />
+                <VotePreview data={voteData} />
             </InfoWrap>
             <InfoWrap>
                 <DetailSubTitle subtitle="의결식 (%)" />

@@ -55,7 +55,7 @@ export default function MeetingDetail() {
     return(
         <Wrapper>
             <Info>
-                <DetailTitle title={meeting.meetingName} activate={meeting.activate} deleteHandler={deleteHandler} />
+                <DetailTitle title={meeting.meetingName} activate={meeting.activate} deleteHandler={deleteHandler} updateLink={`/meeting/${meetingId}/update`} />
                 <InfoElement>일시 : {meeting.meetingDate}</InfoElement>
                 <InfoElement>주최 : {meeting.sponsor}</InfoElement>
             </Info>

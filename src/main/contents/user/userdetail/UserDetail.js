@@ -1,9 +1,45 @@
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
+import { BASE_URL, CONFIG } from "../../../../consts/BaseUrl"
 import { BACKGROUND_GRAY, DEFAULT_BLACK, DEFAULT_WHITE, LIGHT_NAVY, NAV_GRAY } from "../../../../consts/ColorCodes"
 import DetailTitle from "../../components/DetailTitle"
 
 export default function UserDetail() {
+
+    var {studentNumber} = useParams()
+    var [member, setMember] = useState([])
+    var [button, setButton] = useState({
+        text: "",
+        url: ""
+    })
+
+    const getUserDetail = function() {
+        axios.get(BASE_URL + "/admin/member/" + studentNumber, CONFIG)
+            .then((response) => {
+                setMember(response.data.data)
+
+                if(response.data.data.activate === true) {
+                    setButton({
+                        text : "비활성화",
+                        url : "/admin/member/" + response.data.data.studentNumber + "/block"
+                    })
+                } else if (response.data.data.activate === false) {
+                    setButton({
+                        text : "활성화",
+                        url : "/admin/member/" + response.data.data.studentNumber + "/permit"
+                    })
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        getUserDetail()
+    }, [])
     
     const Wrapper = styled.div`
         margin: 30px;
@@ -48,17 +84,33 @@ export default function UserDetail() {
             color: ${LIGHT_NAVY};
         }
     `
+
+    const handleClick = function(e) {
+        e.preventDefault()
+        let confirmMessage = `${member.name}님의 상태를 "${button.text}"로 변경하시겠습니까?`
+
+        if(window.confirm(confirmMessage) === true) {
+            var url = e.target.value
+            axios.patch(BASE_URL + url, CONFIG)
+                .then(() => {
+                    getUserDetail()
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+    }
     
     return (
         <Wrapper>
             <Image src="https://github.com/U-KIDS/general-meeting-management-system-admin/assets/64270501/d715d64a-872c-4e92-9285-a3f802036f82"></Image>
             <StudentInfo>
-                <DetailTitle title="김멋사" updateLink="/user/20194059/update" activate="true"></DetailTitle>
-                <InfoElement>단과대학 : SW융합대학</InfoElement>
-                <InfoElement>학과 : 컴퓨터소프트웨어공학과</InfoElement>
-                <InfoElement>학년 : 3학년</InfoElement>
-                <InfoElement>학번 : 20194059</InfoElement>
-                <Button>비활성화</Button>
+                <DetailTitle title={member.name} updateLink={`/user/${member.studentNumber}/update`} activate={member.activate}></DetailTitle>
+                <InfoElement>단과대학 : {member.college}</InfoElement>
+                <InfoElement>학과 : {member.major}</InfoElement>
+                <InfoElement>학년 : {member.grade}학년</InfoElement>
+                <InfoElement>학번 : {member.studentNumber}</InfoElement>
+                <Button onClick={handleClick} value={button.url}>{button.text}</Button>
             </StudentInfo>
         </Wrapper>
     )
