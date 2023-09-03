@@ -168,6 +168,7 @@ export default function Login() {
         axios.post(BASE_URL + "/auth/login", body)
             .then((response) => {
                 if (response.data.status === 200) {
+                    console.log(response)
                     var token = response.data.data.token
                     window.sessionStorage.setItem("token", token);
                     navigate("/user")
@@ -177,6 +178,7 @@ export default function Login() {
                 }
             })
             .catch((error) => {
+                console.log(error)
                 setColor(DISAGREE_RED)
                 setErrorText("* 아이디 혹은 비밀번호를 확인하세요")
             })
