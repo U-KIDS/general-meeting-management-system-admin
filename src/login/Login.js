@@ -4,7 +4,7 @@ import { BACKGROUND_GRAY, DISAGREE_RED, LIGHT_NAVY, NAV_GRAY, PARAN_NAVY } from 
 import paran_logo from "../images/paran_logo.png"
 import { useState } from "react"
 import axios from "axios"
-import { BASE_URL } from "../consts/BaseUrl"
+import { BASE_URL, CONFIG } from "../consts/BaseUrl"
 import { useNavigate } from "react-router-dom"
 
 const Wrapper = styled.div`
@@ -165,7 +165,7 @@ export default function Login() {
             password : values.password
         }
 
-        axios.post(BASE_URL + "/auth/login", body)
+        axios.post(BASE_URL + "/auth/login", body, CONFIG)
             .then((response) => {
                 if (response.data.status === 200) {
                     console.log(response)
