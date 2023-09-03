@@ -93,10 +93,9 @@ export default function UserFilter(props) {
                 major: values.major,
                 activate: values.activate,   
             }
-        }).then(function (response) {
-            console.log(response)
+        }).then((response) => {
             props.setMembers(response.data.data.data)
-        })
+        }, [])
     }
 
     return (

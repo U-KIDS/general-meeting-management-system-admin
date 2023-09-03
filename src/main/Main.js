@@ -3,8 +3,11 @@ import Sidebar from "./sidebar/Sidebar";
 import Header from "./header/Header";
 import { Outlet } from "react-router-dom";
 import { BACKGROUND_GRAY } from "../consts/ColorCodes";
+import IsLogedIn from "../login/IsLogedIn";
 
 export default function Main() {
+
+    IsLogedIn()
  
     const Wrapper = styled.div`
         width: 100vw;

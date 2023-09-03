@@ -7,6 +7,6 @@ export default function Redirect() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        navigate("/user")
+        navigate("/login")
     })
 }
