@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://13.124.13.196:8080"
+const BASE_URL = "https://www.ukids-server.site/"
+const CLIENT_URL = "http://localhost:3000"
 const CONFIG = {
     headers: {
       "Access-Control-Allow-Origin": BASE_URL,
