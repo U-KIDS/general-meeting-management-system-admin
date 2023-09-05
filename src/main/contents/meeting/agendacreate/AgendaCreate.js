@@ -71,7 +71,9 @@ export default function AgendaCreate() {
     const {meetingId} = useParams()
     const navigate = useNavigate()
     const [values, setValues] = useState({
-        title: ""
+        title: "",
+        agendaNumber: "",
+        agendaCreateBy: "",
     })
     const [selectedImages, setSelectedImages] = useState([])
 
@@ -123,11 +125,27 @@ export default function AgendaCreate() {
             <DetailSubTitle subtitle="안건 생성" /> 
             <SubContents>
                 <InputElement>
-                    <InputNav>안건 제목</InputNav>
+                    <InputNav>의안 명</InputNav>
                     <Input 
                         type="text"
                         name="title"
                         value={values.title}
+                        onChange={handleChange} required/>
+                </InputElement>
+                <InputElement>
+                    <InputNav>의안 번호</InputNav>
+                    <Input 
+                        type="text"
+                        name="agendaNumber"
+                        value={values.agendaNumber}
+                        onChange={handleChange} required/>
+                </InputElement>
+                <InputElement>
+                    <InputNav>입안처</InputNav>
+                    <Input 
+                        type="text"
+                        name="agendaCreateBy"
+                        value={values.agendaCreateBy}
                         onChange={handleChange} required/>
                 </InputElement>
                 <InputElement>

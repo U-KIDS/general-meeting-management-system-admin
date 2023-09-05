@@ -32,7 +32,6 @@ export default function UserList() {
                     return <UserListComponent to={`/user/${member.studentNumber}`} name={member.name} activate={member.activate} studentNumber={member.studentNumber} grade={member.grade} college={member.college} major={member.major} />
                 })
             }
-            <Pagination />
         </Wrapper>
     )
 }
