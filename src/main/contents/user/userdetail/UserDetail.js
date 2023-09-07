@@ -8,6 +8,7 @@ import DetailTitle from "../../components/DetailTitle"
 
 export default function UserDetail() {
 
+    var navigate = useNavigate()
     var {studentNumber} = useParams()
     var [member, setMember] = useState([])
     var [button, setButton] = useState({
@@ -18,6 +19,7 @@ export default function UserDetail() {
     const getUserDetail = function() {
         axios.get(BASE_URL + "/admin/member/" + studentNumber, CONFIG)
             .then((response) => {
+                console.log(response)
                 setMember(response.data.data)
 
                 if(response.data.data.activate === true) {
@@ -100,12 +102,27 @@ export default function UserDetail() {
                 })
         }
     }
+
+    const deleteHandler = function() {
+        axios.delete(BASE_URL + `/admin/member/${studentNumber}`, CONFIG)
+            .then(() => {
+                navigate("/user")
+            })
+    }
+
+    const getImageUrl = (imageUrl) => {
+        if(imageUrl === null || imageUrl === "") {
+            return "https://i.pinimg.com/564x/e2/21/f0/e221f0954109ff15ad17ad7d05a1859b.jpg"
+        } else {
+            return imageUrl
+        }
+    }
     
     return (
         <Wrapper>
-            <Image src="https://github.com/U-KIDS/general-meeting-management-system-admin/assets/64270501/d715d64a-872c-4e92-9285-a3f802036f82"></Image>
+            <Image src={getImageUrl(member.imageUrl)}></Image>
             <StudentInfo>
-                <DetailTitle title={member.name} updateLink={`/user/${member.studentNumber}/update`} activate={member.activate}></DetailTitle>
+                <DetailTitle title={member.name} updateLink={`/user/${member.studentNumber}/update`} activate={member.activate} deleteHandler={deleteHandler}></DetailTitle>
                 <InfoElement>단과대학 : {member.college}</InfoElement>
                 <InfoElement>학과 : {member.major}</InfoElement>
                 <InfoElement>학년 : {member.grade}학년</InfoElement>

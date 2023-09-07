@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { DEFAULT_WHITE, LIGHT_NAVY, BACKGROUND_GRAY, DEFAULT_BLACK, NAV_GRAY } from "../../../../consts/ColorCodes";
+import { DEFAULT_WHITE, LIGHT_NAVY, BACKGROUND_GRAY, DEFAULT_BLACK, NAV_GRAY, AGREE_GREEN, ACTIVATE_GREEN, DISAGREE_RED } from "../../../../consts/ColorCodes";
 import DetailSubTitle from "../../components/DetailSubTitle";
 import DetailTitle from "../../components/DetailTitle";
 import InputBox from "../../components/InputBox";
@@ -90,9 +90,48 @@ export default function AgendaDetail() {
         color: ${DEFAULT_WHITE};
         border-radius: 5px;
     `
+
+    const ActivateButton = styled.button `
+        width: 100%;
+        height: 60px;
+        border-radius: 10px;
+        background-color: ${LIGHT_NAVY};
+        color: ${DEFAULT_WHITE};
+        font-size: 16px;
+        border: 2px solid ${LIGHT_NAVY};
+        transition: .3s;
+
+        &:hover {
+            background-color: ${BACKGROUND_GRAY};
+            color: ${LIGHT_NAVY};
+        }
+    `  
+
+    const ResolveWrap = styled.div`
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+    `
+
+    const ResolveButton = styled.button `
+        width: 49%;
+        height: 60px;
+        border-radius: 10px;
+        background-color: ${(props) => props.color};
+        color: ${DEFAULT_WHITE};
+        font-size: 16px;
+        border: 2px solid ${(props) => props.color};
+        transition: .3s;
+
+        &:hover {
+            background-color: ${BACKGROUND_GRAY};
+            color: ${(props) => props.color};
+        }
+    `
     
     const deleteHandler = () => {
-        axios.delete(BASE_URL + `/admin/agenda/` + agendaId, CONFIG)
+        axios.delete(BASE_URL + `/admin/agenda/${agendaId}`, CONFIG)
             .then(() => {
                 navigate("/meeting/" + meetingId)
             })
@@ -115,6 +154,55 @@ export default function AgendaDetail() {
         }
     }
 
+    const activateButtonHandler = (status) => {
+        let url
+        if (status === "NOT_STARTED") {
+            url = BASE_URL + `/admin/agenda/${agendaId}/start`
+        } else if (status === "IN_PROGRESS") {
+            url = BASE_URL + `/admin/agenda/${agendaId}/end`
+        }
+
+        axios.patch(url)
+        .then(() => {
+            navigate("/meeting/" + meetingId + "/" +agendaId)
+        })
+    }
+
+    const getButtons = (agendaStatus, activateButtonHandler) => {
+        if (agendaStatus === 'NOT_STARTED') {
+            return (
+                <InfoWrap>
+                    <DetailSubTitle subtitle="조작" />
+                    <SubContents>
+                        <ActivateButton onClick={() => activateButtonHandler(agendaStatus)}>투표 시작</ActivateButton>
+                    </SubContents>
+                </InfoWrap>
+            )
+        } else if (agendaStatus === "IN_PROGRESS") {
+            return (
+                <InfoWrap>
+                    <DetailSubTitle subtitle="조작" />
+                    <SubContents>
+                        <ActivateButton onClick={() => activateButtonHandler(agendaStatus)}>투표 종료</ActivateButton>
+                    </SubContents>
+                </InfoWrap>
+            )
+        } else if (agendaStatus === "COMPLETE") {
+            return (
+                <InfoWrap>
+                    <DetailSubTitle subtitle="결과 입력" />
+                    <SubContents>
+                        <ResolveWrap>
+                            <ResolveButton color={AGREE_GREEN}>찬성</ResolveButton>
+                            <ResolveButton color={DISAGREE_RED}>반대</ResolveButton>
+                        </ResolveWrap>
+                    </SubContents>
+                </InfoWrap>
+            )
+        }
+
+    }
+
     const linkText = "자세히 보기 >"
 
     return (
@@ -130,15 +218,7 @@ export default function AgendaDetail() {
                 </SubTitleWrap>
                 <VotePreview data={voteData} />
             </InfoWrap>
-            <InfoWrap>
-                <DetailSubTitle subtitle="의결식 (%)" />
-                <SubContents>
-                    <SubForm>
-                        <InputBox width="79%" placeholder=" %" />
-                        <SubmitButton>적용</SubmitButton>
-                    </SubForm>
-                </SubContents>
-            </InfoWrap>
+            {getButtons(agenda.agendaStatus, activateButtonHandler)}
         </Wrapper>
     )
 }

@@ -6,8 +6,23 @@ import SubContents from "../../components/SubContents"
 import VoteFilter from "./VoteFilter"
 import VoteListComponent from "./VoteListComponent"
 import VoteListNav from "./VoteListNav"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { BASE_URL } from "../../../../consts/BaseUrl"
+import { useParams } from "react-router-dom"
 
 export default function AgendaVote() {
+
+    var [votes, setVotes] = useState([]);
+    var {meetingId, agendaId} = useParams()
+
+    // useEffect(() => {
+    //     axios.get(BASE_URL + "/admin/agenda/" + agendaId + "/vote")
+    //     .then((response) => {
+    //         console.log(response)
+    //         setVotes(response)
+    //     })
+    // }, [])
 
     const Wrapper = styled.div`
         margin: 30px;
