@@ -13,6 +13,9 @@ import Redirect from './main/Redirect';
 import AgendaCreate from './main/contents/meeting/agendacreate/AgendaCreate';
 import AgendaVote from './main/contents/meeting/agendavote/AgendaVote';
 import MeetingUpdate from './main/contents/meeting/meetingupdate/MeetingUpdate';
+import AgendaOverview from './main/contents/overview/ageendaoverview/AgendaOverview';
+import Overview from './main/contents/overview/Overview';
+import MeetingOverview from './main/contents/overview/meetingoverview/MeetingOverview';
 
 export default function App() {
   return (
@@ -20,9 +23,11 @@ export default function App() {
         <Route path="/login" element={<Login/>} />
         <Route path='/' element={<Main />}>
           <Route path='/' element={<Redirect />} />
+          
           <Route path='/user' element={<UserList />} />
           <Route path='/user/:studentNumber' element={<UserDetail />} />
           <Route path='/user/:studentNumber/update' element={<UserUpdate />} />
+          
           <Route path='/meeting' element={<MeetingList />} />
           <Route path='/meeting/:meetingId' element={<MeetingDetail />} />
           <Route path='/meeting/create' element={<MeetingCreate />} />
@@ -31,6 +36,10 @@ export default function App() {
           <Route path='/meeting/:meetingId/:agendaId/:imageIndex' element={<AgendaDetail />} />
           <Route path='/meeting/:meetingId/:agendaId/vote' element={<AgendaVote />} />
           <Route path='/meeting/:meetingId/agenda/create' element={<AgendaCreate />} />
+        </Route>
+        <Route path='/overview' element={<Overview />} >
+          <Route path='/overview/meeting' element={<MeetingOverview />} />
+          <Route path='/overview/agendas' element={<AgendaOverview />} />
         </Route>
     </Routes>
   );

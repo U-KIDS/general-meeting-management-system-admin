@@ -72,7 +72,7 @@ export default function Sidebar() {
             </Logo>
             <MenuLink to='/user' style={({isActive}) => (isActive ? ActivateStyle : undefined)}>대의원 관리</MenuLink>
             <MenuLink to='/meeting' style={({isActive}) => (isActive ? ActivateStyle : undefined)}>정기총회 관리</MenuLink>
-            <MenuLink>송출 페이지</MenuLink>
+            <MenuLink to='/overview' >송출 페이지</MenuLink>
             <MenuLink to='/login'>로그아웃</MenuLink>
             <DesignedBy>Liklion SCH 2023</DesignedBy>
         </Wrapper>

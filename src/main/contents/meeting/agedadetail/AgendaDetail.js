@@ -214,7 +214,7 @@ export default function AgendaDetail() {
             <InfoWrap>
                 <SubTitleWrap>
                     <SubTitle>투표 현황</SubTitle>
-                    <DetailLink to={`/meeting/${meetingId}/${agendaId}1/vote`}>{linkText}</DetailLink>
+                    <DetailLink to={`/meeting/${meetingId}/${agendaId}/vote`}>{linkText}</DetailLink>
                 </SubTitleWrap>
                 <VotePreview data={voteData} />
             </InfoWrap>

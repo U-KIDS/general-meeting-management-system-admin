@@ -16,13 +16,13 @@ export default function AgendaVote() {
     var [votes, setVotes] = useState([]);
     var {meetingId, agendaId} = useParams()
 
-    // useEffect(() => {
-    //     axios.get(BASE_URL + "/admin/agenda/" + agendaId + "/vote")
-    //     .then((response) => {
-    //         console.log(response)
-    //         setVotes(response)
-    //     })
-    // }, [])
+    useEffect(() => {
+        axios.get(BASE_URL + "/admin/agenda/" + agendaId + "/vote")
+        .then((response) => {
+            console.log(response)
+            setVotes(response)
+        })
+    }, [])
 
     const Wrapper = styled.div`
         margin: 30px;
