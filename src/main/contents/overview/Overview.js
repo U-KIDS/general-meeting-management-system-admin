@@ -14,7 +14,7 @@ export default () => {
     return (
         <Wrapper>
             <Header>
-                <LogoLink to="/">
+                <LogoLink to="/user">
                     <LogoImage alt="총대의원회 파란 로고" src={paran_logo}></LogoImage>
                 </LogoLink>
                 <Nav>

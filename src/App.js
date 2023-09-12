@@ -16,6 +16,7 @@ import MeetingUpdate from './main/contents/meeting/meetingupdate/MeetingUpdate';
 import AgendaOverview from './main/contents/overview/ageendaoverview/AgendaOverview';
 import Overview from './main/contents/overview/Overview';
 import MeetingOverview from './main/contents/overview/meetingoverview/MeetingOverview';
+import AgendaDetailOverview from './main/contents/overview/agendadetailoverview/AgendaDetailOverview';
 
 export default function App() {
   return (
@@ -39,7 +40,8 @@ export default function App() {
         </Route>
         <Route path='/overview' element={<Overview />} >
           <Route path='/overview/meeting' element={<MeetingOverview />} />
-          <Route path='/overview/agendas' element={<AgendaOverview />} />
+          <Route path='/overview/meeting/:meetingId' element={<AgendaOverview />} />
+          <Route path='/overview/meeting/:meetingId/:agendaId' element={<AgendaDetailOverview />} />
         </Route>
     </Routes>
   );

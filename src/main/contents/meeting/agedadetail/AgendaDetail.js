@@ -168,7 +168,16 @@ export default function AgendaDetail() {
         })
     }
 
-    const getButtons = (agendaStatus, activateButtonHandler) => {
+    const ResolveButtonHandler = (e) => {
+        let value = e.target.value
+
+        axios.patch(BASE_URL + `/admin/agenda/${agendaId}/resolve?agendaResult=${value}`)
+        .then(() => {
+            navigate("/meeting/" + meetingId + "/" +agendaId)
+        })
+    }
+
+    const getButtons = (agendaStatus, result, activateButtonHandler, resolveButtonHandler) => {
         if (agendaStatus === 'NOT_STARTED') {
             return (
                 <InfoWrap>
@@ -188,13 +197,31 @@ export default function AgendaDetail() {
                 </InfoWrap>
             )
         } else if (agendaStatus === "COMPLETE") {
+
+            if(result != null || result != undefined) {
+
+                let resultText
+                if(result === "AGREE") {
+                    resultText="찬성"
+                } else if (result === "DISAGREE") {
+                        resultText="반대"
+                }
+
+                return(
+                    <InfoWrap>
+                        <DetailSubTitle subtitle="결과" />
+                        {resultText}
+                    </InfoWrap>
+                )
+            }
+
             return (
                 <InfoWrap>
                     <DetailSubTitle subtitle="결과 입력" />
                     <SubContents>
                         <ResolveWrap>
-                            <ResolveButton color={AGREE_GREEN}>찬성</ResolveButton>
-                            <ResolveButton color={DISAGREE_RED}>반대</ResolveButton>
+                            <ResolveButton onClick={resolveButtonHandler} value="AGREE" color={AGREE_GREEN}>찬성</ResolveButton>
+                            <ResolveButton onClick={resolveButtonHandler} value="DISAGREE" color={DISAGREE_RED}>반대</ResolveButton>
                         </ResolveWrap>
                     </SubContents>
                 </InfoWrap>
@@ -218,7 +245,7 @@ export default function AgendaDetail() {
                 </SubTitleWrap>
                 <VotePreview data={voteData} />
             </InfoWrap>
-            {getButtons(agenda.agendaStatus, activateButtonHandler)}
+            {getButtons(agenda.agendaStatus, agenda.result, activateButtonHandler, ResolveButtonHandler)}
         </Wrapper>
     )
 }
