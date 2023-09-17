@@ -120,7 +120,8 @@ export default function MeetingCreate() {
                     <Input 
                         value={values.sponsor} 
                         width="84%"
-                        name="sponsor" required></Input>
+                        name="sponsor"
+                        onChange={handleChange} required></Input>
                 </InputElement>
                 <SubmitButton>
                     생성

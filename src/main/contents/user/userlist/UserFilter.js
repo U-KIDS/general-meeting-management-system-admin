@@ -131,6 +131,7 @@ export default function UserFilter(props) {
                     value={values.name}
                     onChange={handleChange}>
                 </TextInput>
+                {props.size} 개의 결과
             </div>
             <SubmitButton value="검색" type="submit"></SubmitButton>
         </FilterForm>

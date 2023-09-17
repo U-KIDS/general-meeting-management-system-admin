@@ -9,7 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient;
 
 root.render(
-  <BrowserRouter>
+  // <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />

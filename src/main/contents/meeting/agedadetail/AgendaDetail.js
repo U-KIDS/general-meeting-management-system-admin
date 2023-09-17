@@ -28,6 +28,7 @@ export default function AgendaDetail() {
     useEffect(() => {
         axios.get(BASE_URL + "/admin/agenda/" + agendaId, CONFIG)
             .then((response) => {
+                console.log(response)
                 setAgenda(response.data.data)
                 setVoteData(response.data.data.votePreviewDto)
                 setImageUrls(response.data.data.imageUrls)
@@ -128,6 +129,12 @@ export default function AgendaDetail() {
             background-color: ${BACKGROUND_GRAY};
             color: ${(props) => props.color};
         }
+    `
+
+    const InfoElement = styled.p`
+        color: ${DEFAULT_BLACK};
+        font-size: 18px;
+        margin-bottom: 14px;
     `
     
     const deleteHandler = () => {
@@ -236,6 +243,8 @@ export default function AgendaDetail() {
         <Wrapper>
             <InfoWrap>
                 <DetailTitle title={agenda.title} activate={agenda.agendaStatus} deleteHandler={deleteHandler} />       
+                <InfoElement>입안 번호 : {agenda.agendaNumber}</InfoElement>
+                <InfoElement>입안처 : {agenda.agendaCreateBy}</InfoElement>
             </InfoWrap>
             {init()}
             <InfoWrap>

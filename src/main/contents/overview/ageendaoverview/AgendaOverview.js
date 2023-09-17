@@ -19,7 +19,7 @@ export default () => {
         .then((response) => {
             setAgendas(response.data.data.data)
         })
-    })
+    }, [])
     
 
     return (
@@ -36,7 +36,7 @@ export default () => {
                             <AgendaCard to={`/overview/meeting/${meetingId}/${agenda.agendaId}`}>
                                 <CardContent>{agenda.agendaNumber}</CardContent>
                                 <CardContent>{agenda.title}</CardContent>
-                                <CardContent>{agenda.createdBy}</CardContent>
+                                <CardContent>{agenda.agendaCreateBy}</CardContent>
                             </AgendaCard>
                         )
                     })
@@ -80,6 +80,9 @@ const CardNav = styled.div`
 const NavContent = styled.p`
     font-size: 14px;
     font-weight: 600;
+    width: 250px;
+    height: 30px;
+    text-align: center;
 `
 
 const AgendaCard = styled(Link)`
@@ -103,4 +106,8 @@ const AgendaCard = styled(Link)`
 
 const CardContent = styled.p`
     color: ${DEFAULT_BLACK};
+    width: 250px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
 `

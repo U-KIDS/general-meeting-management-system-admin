@@ -135,7 +135,8 @@ export default function MeetingUpdate() {
                     <Input 
                         value={values.sponsor} 
                         width="84%"
-                        name="sponsor" required></Input>
+                        name="sponsor"
+                        onChange={handleChange} required></Input>
                 </InputElement>
                 <SubmitButton>
                     수정

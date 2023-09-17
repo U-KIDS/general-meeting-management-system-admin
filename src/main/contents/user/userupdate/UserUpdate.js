@@ -1,8 +1,13 @@
+import axios from "axios"
+import { useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
+import { BASE_URL } from "../../../../consts/BaseUrl"
 import { DEFAULT_WHITE, LIGHT_NAVY, DEFAULT_BLACK, BACKGROUND_GRAY } from "../../../../consts/ColorCodes"
 import DetailSubTitle from "../../components/DetailSubTitle"
 import InputBox from "../../components/InputBox"
 import SubContents from "../../components/SubContents"
+import { useState } from "react"
 
 const Form = styled.form`
     margin: 30px;
@@ -47,30 +52,74 @@ const SubmitButton = styled.button`
 
 export default function UserUpdate() {
 
+    const {studentNumber} = useParams()
+    const navigate = useNavigate()
+    let [values, setValues] = useState({
+        name: "",
+        studentNumber: "",
+        grade: 1,
+        college: "",
+        major: "",
+    })
+
+    const handleChange = function(e) {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = function(e) {
+        e.preventDefault();
+
+        let body= {
+            name: values.name,
+            studentNumber: values.studentNumber,
+            grade: values.grade,
+            college: values.college,
+            major: values.major,
+        }
+
+        axios.patch(BASE_URL + "/admin/member/" + studentNumber, body)
+        .then((response) => {
+            console.log(response)
+            navigate("/user/" + studentNumber)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    useEffect(() =>{
+        axios.get(BASE_URL + "/admin/member/" + studentNumber)
+        .then((response) => {
+            setValues(response.data.data)
+        }) 
+    }, [])
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <DetailSubTitle subtitle = "회원정보 수정" />
             <SubContents>
                 <InputElement>
                     <InputNav>이름</InputNav>
-                    <InputBox value="김멋사" type="text" width="84%" />
+                    <InputBox name="name" onChange={handleChange} value={values.name} type="text" width="84%" />
                 </InputElement>
                 <InputElement>
                     <InputNav>학번</InputNav>
-                    <InputBox value="20194059" type="text" width="84%" />
+                    <InputBox name="studentNumber" onChange={handleChange} value={values.studentNumber} type="text" width="84%" />
                 </InputElement>
                 <InputElement>
                     <InputNav>학년</InputNav>
-                    <InputBox value="3" type="number" width="84%" />
+                    <InputBox name="grade" onChange={handleChange} value={values.grade} type="number" width="84%" />
                 </InputElement>
                 <InputElement>
                     <InputNav>단과대학</InputNav>
-                    <InputBox value="SW융합대학" type="text" width="84%" />
+                    <InputBox name="college" onChange={handleChange} value={values.college} type="text" width="84%" />
                 </InputElement>
                 <InputElement>
                     <InputNav>학과</InputNav>
-                    <InputBox value="컴퓨터소프트웨어공학과" type="text" width="84%" />
+                    <InputBox name="major" onChange={handleChange} value={values.major} type="text" width="84%" />
                 </InputElement>
                 <SubmitButton>수정</SubmitButton>
             </SubContents>

@@ -16,6 +16,9 @@ export default function UserDetail() {
         url: ""
     })
 
+    console.log(studentNumber)
+    console.log(typeof studentNumber)
+
     const getUserDetail = function() {
         axios.get(BASE_URL + "/admin/member/" + studentNumber, CONFIG)
             .then((response) => {
@@ -111,7 +114,7 @@ export default function UserDetail() {
     }
 
     const getImageUrl = (imageUrl) => {
-        if(imageUrl === null || imageUrl === "") {
+        if(imageUrl === null || imageUrl === "" || imageUrl === undefined) {
             return "https://i.pinimg.com/564x/e2/21/f0/e221f0954109ff15ad17ad7d05a1859b.jpg"
         } else {
             return imageUrl

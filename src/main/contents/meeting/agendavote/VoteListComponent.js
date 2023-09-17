@@ -33,10 +33,10 @@ export default function VoteListComponent(props) {
 
     return (
         <ListComponent>
-            <VoteElement size="200px" weight="600">김멋사</VoteElement>
-            <VoteValue value="AGREE" />
-            <VoteElement size="100px">20194059</VoteElement>
-            <VoteElement size="300px">컴퓨터소프트웨어공학과</VoteElement>
+            <VoteElement size="200px" weight="600">{props.name}</VoteElement>
+            <VoteValue value={props.voteValue} />
+            <VoteElement size="100px">{props.studentNumber}</VoteElement>
+            <VoteElement size="300px">{props.major}</VoteElement>
         </ListComponent>
     )
 }

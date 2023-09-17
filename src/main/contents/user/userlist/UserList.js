@@ -14,7 +14,6 @@ export default function UserList() {
     useEffect(() => {
         axios.get(BASE_URL + "/admin/member", CONFIG)
             .then((response) => {
-                console.log(response)
                 setMembers(response.data.data.data)
             })
     }, [])
@@ -22,10 +21,11 @@ export default function UserList() {
     const Wrapper = styled.div`
         margin: 30px;
     `
+    console.log(members)
 
     return (
         <Wrapper>
-            <UserFilter setMembers={setMembers} />
+            <UserFilter size={members.length} setMembers={setMembers} />
             <UserListNav />
             {
                 members.map((member) => {

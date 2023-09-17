@@ -15,12 +15,20 @@ export default function AgendaVote() {
 
     var [votes, setVotes] = useState([]);
     var {meetingId, agendaId} = useParams()
+    var [infos, setInfos] = useState({
+        agendaName : "",
+        agendaStatus : ""
+    })
 
     useEffect(() => {
         axios.get(BASE_URL + "/admin/agenda/" + agendaId + "/vote")
         .then((response) => {
             console.log(response)
-            setVotes(response)
+            setVotes(response.data.data.votes)
+            setInfos({
+                agendaName: response.data.data.agendaName,
+                agendaStatus: response.data.data.agendaStatus,
+            })
         })
     }, [])
 
@@ -53,21 +61,21 @@ export default function AgendaVote() {
     return (
         <Wrapper>
             <TitleWrap>
-                <Title>선거세칙 개정안</Title>
-                <Activate value={"IN_PROGRESS"} />
+                <Title>{infos.agendaName}</Title>
+                <Activate value={infos.agendaStatus} />
             </TitleWrap>
             <Contents>
                 <DetailSubTitle subtitle="투표 현황" />
                 <SubContents>
-                    <VoteFilter />
+                    <VoteFilter size={votes.length} />
                     <VoteListNav />
-                    <VoteListComponent />
-                    <VoteListComponent />
-                    <VoteListComponent />
-                    <VoteListComponent />
-                    <VoteListComponent />
-                    <VoteListComponent />
-                    <VoteListComponent />
+                    {
+                        votes.map((vote) => {
+                            return (
+                                <VoteListComponent name={vote.name} voteValue = {vote.voteValue} studentNumber={vote.studentNumber} major ={vote.major} />
+                            )
+                        })
+                    }
                 </SubContents>
             </Contents>
         </Wrapper>

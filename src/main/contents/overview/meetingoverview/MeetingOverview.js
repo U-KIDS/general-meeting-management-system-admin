@@ -37,7 +37,7 @@ export default () => {
                                 <ContentTitle>주관</ContentTitle>
                                 <Contents>{meeting.sponsor}</Contents>
                             </Description>
-                            <QRCode src="https://qrcodethumb-phinf.pstatic.net/20230911_108/1694440930035rkB0W_PNG/1daFJ.png"></QRCode>
+                            <QRCode src="https://qrcodethumb-phinf.pstatic.net/20230913_48/1694585733460ioo9t_PNG/1dgcj.png"></QRCode>
                         </Detail>
                     </MeetingCard>
                     )

@@ -42,7 +42,7 @@ const SubmitButton = styled.input`
     border-radius: 5px;
 `
 
-export default function VoteFilter() {
+export default function VoteFilter(props) {
 
     const [values, setValues] = useState({
         name: "",
@@ -81,6 +81,7 @@ export default function VoteFilter() {
                     value={values.name}
                     onChange={handleChange}>
                 </TextInput>
+                {props.size} 개의 결과
             </div>
             <SubmitButton value="검색" type="submit"></SubmitButton>
         </FilterForm>
